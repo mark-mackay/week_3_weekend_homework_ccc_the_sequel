@@ -26,7 +26,7 @@ class Film
   def self.all()
     sql = "SELECT * FROM films"
     values = []
-    movies = SqlRunner.run(sql, values)
+    films = SqlRunner.run(sql, values)
     result = films.map { |film| Film.new( film ) }
     return result
   end

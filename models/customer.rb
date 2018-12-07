@@ -24,8 +24,8 @@ class Customer
   def self.all()
     sql = "SELECT * FROM customers"
     values = []
-    stars = SqlRunner.run(sql, values)
-    result = customers.map { |customer| Customer.new( customer ) }
+    customers_hash = SqlRunner.run(sql, values)
+    result = customers_hash.map { |customer| Customer.new( customer ) }
     return result
   end
 
@@ -44,6 +44,7 @@ class Customer
     films_hash = SqlRunner.run(sql, values)
     return films_hash.map {|film| Film.new(film)}
   end
+  
   def ticket()
     sql = "SELECT * FROM tickets WHERE tickets.customer_id = $1;"
     values = [@id]
