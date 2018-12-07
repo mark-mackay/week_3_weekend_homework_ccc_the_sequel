@@ -53,6 +53,14 @@ class Film
     films_hash = SqlRunner.run(sql, values)
     return films_hash.map {|ticket| Ticket.new(ticket)}
   end
-
-
+  def delete()
+    sql = "DELETE FROM films WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+  def update()
+    sql = "UPDATE films SET (title, price, ticket_limit) = ($1, $2, $3) WHERE id = $4"
+    values = [@title, @price, @ticket_limit, @id]
+    SqlRunner.run(sql, values)
+  end
 end

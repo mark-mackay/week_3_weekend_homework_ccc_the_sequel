@@ -34,6 +34,11 @@ class Customer
     values = []
     SqlRunner.run(sql, values)
   end
+  def delete()
+    sql = "DELETE FROM customers WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
   def films()
     sql = "SELECT films.* FROM films
     INNER JOIN tickets
@@ -44,12 +49,17 @@ class Customer
     films_hash = SqlRunner.run(sql, values)
     return films_hash.map {|film| Film.new(film)}
   end
-  
+
   def ticket()
     sql = "SELECT * FROM tickets WHERE tickets.customer_id = $1;"
     values = [@id]
     tickets_hash = SqlRunner.run(sql, values)
     return tickets_hash.map {|ticket| Ticket.new(ticket)}
+  end
+  def update()
+    sql = "UPDATE customers SET (name, funds) = ($1, $2) WHERE id = $3"
+    values = [@name, @funds, @id]
+    SqlRunner.run(sql, values)
   end
 
 
