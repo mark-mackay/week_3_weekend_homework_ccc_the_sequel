@@ -61,6 +61,15 @@ class Customer
     values = [@name, @funds, @id]
     SqlRunner.run(sql, values)
   end
+  def self.find(id)
+      sql = "SELECT * FROM customers
+      WHERE id = $1"
+      values = [id]
+      results = SqlRunner.run(sql, values)
+      customer_hash = results.first
+      customer = Customer.new(customer_hash)
+      return customer
+  end
 
 
 

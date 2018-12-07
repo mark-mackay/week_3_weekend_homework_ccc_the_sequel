@@ -63,4 +63,13 @@ class Film
     values = [@title, @price, @ticket_limit, @id]
     SqlRunner.run(sql, values)
   end
+  def self.find(id)
+      sql = "SELECT * FROM films
+      WHERE id = $1"
+      values = [id]
+      results = SqlRunner.run(sql, values)
+      film_hash = results.first
+      film = Film.new(film_hash)
+      return film 
+  end
 end
