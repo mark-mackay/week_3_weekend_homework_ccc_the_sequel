@@ -70,7 +70,16 @@ class Customer
       customer = Customer.new(customer_hash)
       return customer
   end
-
-
-
+  def buy_ticket(film_id)
+    film = Film.find(film_id)
+    if film.price.to_i <= @funds && film.tickets_sold < film.ticket_limit.to_i
+      @funds -= film.price.to_i
+      update()
+      film.tickets_sold += 1
+      film.update
+      return Ticket.new('customer_id' => @id, 'film_id' => film_id)
+    else
+      return nil 
+    end
+  end
 end

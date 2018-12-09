@@ -7,7 +7,9 @@ CREATE TABLE films (
   id SERIAL4 PRIMARY KEY,
   title VARCHAR(255),
   price INT,
-  ticket_limit INT
+  ticket_limit INT,
+  tickets_sold INT,
+  film_time TIME
 );
 
 CREATE TABLE customers (
